@@ -17,20 +17,20 @@ const spanLoadMore = document.querySelector('.available-photo-quantity');
 const loader = document.querySelector('.js-loader');
 
 const photoPerPage = 15;
-let availablePhotoQuantity;
+let availablePhotoQuantity = 0;
 let searchedValue = '';
-let currentPage;
-let totalPages;
+let currentPage = 1;
+let totalPages = 0;
+
+
+loadMoreBtn.classList.add('is-hidden');
 
 const checkAvailablePhoto = () => {
-if (currentPage < totalPages) {
-  loadMoreBtn.classList.remove('is-hidden');
-  if (typeof availablePhotoQuantity === 'number' && availablePhotoQuantity > 0) {
+  if (currentPage < totalPages) {
+    loadMoreBtn.classList.remove('is-hidden'); 
     spanLoadMore.textContent = availablePhotoQuantity;
   } else {
-    spanLoadMore.textContent = ''; 
-  }
-  } else {
+    loadMoreBtn.classList.add('is-hidden');  
     iziToast.show({
       timeout: 3000,
       message: "We're sorry, but you've reached the end of search results.",
@@ -40,13 +40,17 @@ if (currentPage < totalPages) {
   }
 };
 
+
 const onSearchFormSubmit = async event => {
   try {
     event.preventDefault();
 
+
     loader.classList.remove('is-hidden');
+    loadMoreBtn.classList.add('is-hidden'); 
 
     searchedValue = searchFormEl.elements.user_query.value.trim();
+
     if (!searchedValue) {
       iziToast.show({
         timeout: 3000,
@@ -58,12 +62,11 @@ const onSearchFormSubmit = async event => {
       galleryEl.innerHTML = '';
       searchFormEl.reset();
       loader.classList.add('is-hidden');
-      loadMoreBtn.classList.add('is-hidden');
-
       return;
     }
 
     currentPage = 1;
+
 
     const { data } = await fetchPhotos(searchedValue, currentPage, photoPerPage);
 
@@ -79,10 +82,6 @@ const onSearchFormSubmit = async event => {
 
       galleryEl.innerHTML = '';
       searchFormEl.reset();
-
-      loader.classList.add('is-hidden');
-      loadMoreBtn.classList.add('is-hidden');
-
       return;
     }
 
@@ -93,7 +92,8 @@ const onSearchFormSubmit = async event => {
 
     totalPages = Math.ceil(data.totalHits / photoPerPage);
     availablePhotoQuantity = data.totalHits - photoPerPage;
-    checkAvailablePhoto();
+
+    checkAvailablePhoto();  
   } catch (error) {
     iziToast.show({
       timeout: 5000,
@@ -109,7 +109,7 @@ const onLoadMoreBtn = async () => {
     currentPage++;
 
     loader.classList.remove('is-hidden');
-    loadMoreBtn.classList.add('is-hidden');
+    loadMoreBtn.classList.add('is-hidden'); 
 
     const { data } = await fetchPhotos(searchedValue, currentPage, photoPerPage);
 
@@ -120,7 +120,7 @@ const onLoadMoreBtn = async () => {
 
     availablePhotoQuantity -= photoPerPage;
 
-    checkAvailablePhoto();
+    checkAvailablePhoto(); 
 
     const galleryImg = galleryEl.querySelector('li');
     let imgHeight = galleryImg.getBoundingClientRect().height;
@@ -138,7 +138,6 @@ const onLoadMoreBtn = async () => {
   }
 };
 
+// Додавання обробників подій
 searchFormEl.addEventListener('submit', onSearchFormSubmit);
 loadMoreBtn.addEventListener('click', onLoadMoreBtn);
-
-

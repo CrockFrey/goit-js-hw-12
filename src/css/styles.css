@@ -55,6 +55,8 @@
   letter-spacing: 0.04em;
   color: #fff;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+  animation: colorGradient 3s infinite;
 }
 
 .load-btn-container {
@@ -73,9 +75,10 @@
   font-size: 16px;
   line-height: 1.5;
   letter-spacing: 0.04em;
-  сolor: #fff;
   cursor: pointer;
   margin: 0 auto;
+  transition: background-color 0.3s ease;
+  animation: colorGradient 3s infinite;
 }
 
 .search-btn:hover,
@@ -137,7 +140,9 @@
   line-height: 2;
 }
 
-
+.is-hidden {
+  display: none;
+}
 
 /* izi-toasts */
 .iziToast-wrapper-topRight {
