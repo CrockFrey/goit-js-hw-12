@@ -55,8 +55,6 @@
   letter-spacing: 0.04em;
   color: #fff;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  animation: colorGradient 3s infinite;
 }
 
 .load-btn-container {
@@ -77,8 +75,6 @@
   letter-spacing: 0.04em;
   cursor: pointer;
   margin: 0 auto;
-  transition: background-color 0.3s ease;
-  animation: colorGradient 3s infinite;
 }
 
 .search-btn:hover,
