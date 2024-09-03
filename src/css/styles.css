@@ -44,7 +44,6 @@
 }
 
 .search-btn {
-  width: 91px;
   border-radius: 8px;
   padding: 8px 16px;
   background: #4e75ff;
@@ -58,7 +57,29 @@
   cursor: pointer;
 }
 
-.search-btn:hover {
+.load-btn-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+
+}
+
+.load-btn {
+  border-radius: 8px;
+  padding: 8px 16px;
+  background: #4e75ff;
+  border: none;
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  сolor: #fff;
+  cursor: pointer;
+  margin: 0 auto;
+}
+
+.search-btn:hover,
+.load-btn:hover {
   background: #6c8cff;
 }
 
@@ -115,6 +136,8 @@
   font-weight: 400;
   line-height: 2;
 }
+
+
 
 /* izi-toasts */
 .iziToast-wrapper-topRight {
@@ -173,7 +196,7 @@
   border: 3px dotted #FFF;
   border-style: solid solid dotted dotted;
   border-radius: 50%;
-  display: inline-block;
+  display: none;
   position: relative;
   box-sizing: border-box;
   animation: rotation 2s linear infinite;
